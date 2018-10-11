@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000"
-        android:layout_above="@+id/bottom_bar" />
+        android:layout_above="@+id/hlv_img" />
 
 <!--    <include
         android:id="@+id/top_bar"
@@ -42,6 +42,23 @@
 
     </RelativeLayout>
 
+    <com.lzy.imagepicker.view.HorizontalListView
+        android:id="@+id/hlv_img"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="13dp"
+        android:layout_above="@+id/v_split"
+        >
+
+    </com.lzy.imagepicker.view.HorizontalListView>
+    
+    <View
+        android:id="@+id/v_split"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ff393939"
+        android:layout_above="@+id/bottom_bar"/>
+    
     <LinearLayout
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"

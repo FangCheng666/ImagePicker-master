@@ -130,11 +130,11 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
      */
     @Override
     public void onImageSelected(int position, ImageItem item, boolean isAdd) {
-        if (imagePicker.getSelectImageCount() > 0) {
-            mBtnOk.setText(getString(R.string.ip_select_complete, imagePicker.getSelectImageCount(), imagePicker.getSelectLimit()));
-        } else {
-            mBtnOk.setText(getString(R.string.ip_complete));
-        }
+//        if (imagePicker.getSelectImageCount() > 0) {
+//            mBtnOk.setText(getString(R.string.ip_select_complete, imagePicker.getSelectImageCount(), imagePicker.getSelectLimit()));
+//        } else {
+//            mBtnOk.setText(getString(R.string.ip_complete));
+//        }
 
 //        if (mCbOrigin.isChecked()) {
 //            long size = 0;

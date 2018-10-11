@@ -2,16 +2,21 @@ package com.lzy.imagepicker.ui;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.adapter.ImagePageAdapter;
+import com.lzy.imagepicker.adapter.ImageThumbAdapter;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.util.Utils;
+import com.lzy.imagepicker.view.HorizontalListView;
 import com.lzy.imagepicker.view.ViewPagerFixed;
 
 import java.util.ArrayList;
@@ -37,6 +42,8 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
     protected ViewPagerFixed mViewPager;
     protected ImagePageAdapter mAdapter;
     protected boolean isFromItems = false;
+    protected HorizontalListView mHorizontalListView;
+    private ImageThumbAdapter mThumbAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,22 +82,48 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
             }
         });
 
-//        mTitleCount = (TextView) findViewById(R.id.tv_des);
 
         mViewPager = (ViewPagerFixed) findViewById(R.id.viewpager);
         mAdapter = new ImagePageAdapter(this, mImageItems);
-//        mAdapter.setPhotoViewClickListener(new ImagePageAdapter.PhotoViewClickListener() {
-//            @Override
-//            public void OnPhotoTapListener(View view, float v, float v1) {
-//                onImageSingleTap();
-//            }
-//        });
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(mCurrentPosition, false);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mHorizontalListView.setSelection(position - 2);
+                mThumbAdapter.setThumbSelected(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         //初始化当前页面的状态
 //        mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
+
+        //设置缩略图图的横向listView
+        mHorizontalListView = (HorizontalListView) findViewById(R.id.hlv_img);
+        mThumbAdapter = new ImageThumbAdapter(this,mImageItems,imagePicker);
+        mHorizontalListView.setAdapter(mThumbAdapter);
+
+        mHorizontalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mThumbAdapter.setThumbSelected(position);
+                mViewPager.setCurrentItem(position);
+            }
+        });
+
+
     }
+
 
     /** 单击时，隐藏头和尾 */
 //    public abstract void onImageSingleTap();
@@ -106,4 +139,6 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         super.onSaveInstanceState(outState);
         ImagePicker.getInstance().saveInstanceState(outState);
     }
+
+
 }
