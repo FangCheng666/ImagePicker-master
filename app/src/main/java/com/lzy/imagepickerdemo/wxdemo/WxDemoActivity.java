@@ -15,7 +15,7 @@ import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.imagepickerdemo.R;
 import com.lzy.imagepickerdemo.SelectDialog;
-import com.lzy.imagepickerdemo.imageloader.GlideImageLoader;
+import com.lzy.imagepicker.loader.GlideImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;

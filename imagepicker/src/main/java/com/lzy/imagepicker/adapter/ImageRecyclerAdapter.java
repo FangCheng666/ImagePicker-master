@@ -143,12 +143,12 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         void bind(final int position){
             final ImageItem imageItem = getItem(position);
-//            ivThumb.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (listener != null) listener.onImageItemClick(rootView, imageItem, position);
-//                }
-//            });
+            ivThumb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) listener.onImageItemClick(rootView, imageItem, position);
+                }
+            });
             checkView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
